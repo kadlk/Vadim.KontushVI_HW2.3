@@ -7,14 +7,17 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet var usernameTFOutlet: UITextField!
     @IBOutlet var passwordTFOutlet: UITextField!
+    @IBOutlet var loginButtonOutlet: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTFOutlet.delegate = self
+        passwordTFOutlet.delegate = self
     }
     
     @IBAction func forgotNameAction(_ sender: Any) {
@@ -50,6 +53,20 @@ class LoginViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTag = textField.tag + 1
+            
+        let nextResponder = textField.superview?.viewWithTag(nextTag) as UIResponder?
+
+            if nextResponder != nil {
+                nextResponder?.becomeFirstResponder()
+            } else {
+                loginButtonOutlet.sendActions(for: .touchUpInside)
+            }
+
+            return false
+        }
 }
 
 extension LoginViewController{
