@@ -11,7 +11,7 @@
         <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="LoginViewController" customClass="ViewController" customModule="Vadim_KontushVI_HW2_3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LoginViewController" customModule="Vadim_KontushVI_HW2_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3mC-na-XfX">
                                         <rect key="frame" x="22.5" y="0.0" width="329" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gmd-mp-LKx">
                                         <rect key="frame" x="22.5" y="57" width="329" height="34"/>
@@ -81,7 +81,7 @@
                     <connections>
                         <outlet property="passwordTFOutlet" destination="Gmd-mp-LKx" id="kRb-2A-7Gm"/>
                         <outlet property="usernameTFOutlet" destination="3mC-na-XfX" id="D27-nm-B8Y"/>
-                        <segue destination="eHf-NV-9ha" kind="show" identifier="segueLoadWelcomeScreen" id="uCh-PS-9VX"/>
+                        <segue destination="eHf-NV-9ha" kind="modal" identifier="segueLoadWelcomeScreen" modalPresentationStyle="fullScreen" id="uCh-PS-9VX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -93,25 +93,29 @@
             <objects>
                 <viewController id="eHf-NV-9ha" userLabel="WelcomeViewController" customClass="WelcomeViewController" customModule="Vadim_KontushVI_HW2_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pp1-Fu-l1T">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTX-xq-rep">
-                                <rect key="frame" x="172.5" y="679" width="69.5" height="31"/>
+                                <rect key="frame" x="172.5" y="733" width="69.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                <connections>
+                                    <segue destination="F34-zj-hTU" kind="unwind" unwindAction="unwindToWelcomeVC:" id="h1c-0n-Nge"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hNB-mZ-TUV">
-                                <rect key="frame" x="160" y="186" width="94" height="77.5"/>
+                                <rect key="frame" x="186.5" y="230" width="41.5" height="77.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-7J-gEU">
-                                        <rect key="frame" x="26.5" y="0.0" width="41.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PpY-fh-Dc9">
-                                        <rect key="frame" x="0.0" y="28.5" width="94" height="49"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smiley.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PpY-fh-Dc9">
+                                        <rect key="frame" x="10.5" y="29" width="20" height="48"/>
+                                        <color key="tintColor" systemColor="systemOrangeColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="oPG-kt-Qpg"/>
                                         </constraints>
@@ -120,7 +124,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xse-Cs-EhB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="1" green="0.94908976240290022" blue="0.96869850467882168" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="sTX-xq-rep" firstAttribute="centerX" secondItem="xse-Cs-EhB" secondAttribute="centerX" id="Sgo-Up-pbR"/>
                             <constraint firstItem="hNB-mZ-TUV" firstAttribute="top" secondItem="xse-Cs-EhB" secondAttribute="top" constant="186" id="pWv-cR-JyW"/>
@@ -129,15 +133,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WPR-sQ-htl"/>
+                    <connections>
+                        <outlet property="helloFieldOutlet" destination="Bcr-7J-gEU" id="mG5-ma-N9a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rqo-xK-qA5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="F34-zj-hTU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="800.00000000000011" y="65.625"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <image name="smiley.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
